@@ -17,6 +17,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'images',
+        },
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
@@ -24,7 +31,7 @@ module.exports = {
       {
         test: /\.s?css$/,
         exclude: /node_modules/,
-        loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
+        use: [ { loader: 'style-loader' }, { loader: 'css-loader', options: { url: true } }, { loader: 'sass-loader', options: { url: true } } ],
       },
       {
         test: /\.html$/,
